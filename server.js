@@ -6,6 +6,7 @@ const crypto = require("crypto");
 const path = require("path");
 
 const app = express();
+app.set("trust proxy", 1);
 const PORT = process.env.PORT || 3000;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const SESSION_SECRET = process.env.SESSION_SECRET;
@@ -67,7 +68,10 @@ app.use(cookieSession({
   secure: process.env.NODE_ENV === "production",
   maxAge: 7 * 24 * 60 * 60 * 1000
 }));
-app.use(express.static(path.join(__dirname, "public")));
+
+["index.html", "admin.html", "app.js", "admin.js", "style.css"].forEach((f) => {
+  app.get("/" + f, (req, res) => res.sendFile(path.join(__dirname, f)));
+});
 
 const loginLimiter = rateLimit({windowMs: 15 * 60 * 1000, limit: 10, standardHeaders: true, legacyHeaders: false});
 const codeLimiter = rateLimit({windowMs: 60 * 60 * 1000, limit: 20, standardHeaders: true, legacyHeaders: false});
@@ -186,5 +190,5 @@ app.post("/api/admin/codes", adminLimiter, requireAdmin, (req, res) => {
   res.json({codes: made});
 });
 
-app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 app.listen(PORT, () => console.log(`Lucky VPN Cards running on port ${PORT}`));
