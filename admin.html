@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="tk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin | Lucky VPN Cards</title><link rel="stylesheet" href="/style.css"></head>
+<body><header class="top"><a class="brand" href="/">LUCKY <span>VPN</span> CARDS</a><a class="admin-link" href="/">Saýta dolan</a></header>
+<main class="wrap admin-wrap"><div class="eyebrow">PRIVATE CONTROL ROOM</div><h1>Admin <span>panel</span></h1>
+<section id="adminLogin" class="panel"><h2>Admin girişi</h2><form id="adminForm"><input id="adminPassword" type="password" placeholder="Admin paroly" required><button class="gold-btn">GIR</button></form><div id="adminMsg" class="message"></div></section>
+<section id="dashboard" class="hidden">
+<div class="stats" id="stats"></div>
+<div class="panel"><h2>Täze giriş kodlaryny döret</h2><p class="muted">Her kod bir müşderä bir gezek oýnamaga rugsat berýär.</p><form id="createForm" class="inline-form"><input id="codeCount" type="number" min="1" max="100" value="1"><button class="gold-btn">KOD DÖRET</button></form><div id="newCodes" class="codes"></div></div>
+<div class="panel"><h2>Çykan baýraklar</h2><div id="wins" class="wins muted">Entäk baýrak çykmady.</div></div>
+<button id="logout" class="quiet-btn">Admin panelden çyk</button>
+</section></main><script src="/admin.js"></script></body></html>
